@@ -1,0 +1,13 @@
+---
+- name: Update APT packages on all servers
+  hosts: all  # This applies to all hosts in the inventory
+  become: yes  # Ensure the commands are run as sudo/root
+  tasks:
+    - name: Update the APT package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Cache is valid for 1 hour
+
+    - name: Upgrade all APT packages
+      apt:
+        upgrade: dist
